@@ -1,6 +1,8 @@
-FROM alpine:edge
+FROM alpine:3.4
 
 MAINTAINER Barbar Startup Factory hey@barbar.com.tr
+
+RUN apk upgrade --update
 
 RUN apk add --no-cache nodejs
 
@@ -9,8 +11,8 @@ ADD . /app
 
 WORKDIR /app
 
-RUN npm run setup && rm -rf node_modules
+RUN npm install --unsafe-perm
 
-EXPOSE 80
+EXPOSE 8889
 
 CMD ["npm run start"]
